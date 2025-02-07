@@ -19,21 +19,30 @@ function limpiarLista(identificador){
 //Se crea la funcion para agregar los nombres a la lista.
 function agregarAmigo(){
     let nombreAmigo = document.querySelector('#amigo');
-    listaDeAmigos.push(nombreAmigo.value);
 
     //Se comprueba que no este vacio el input.
     if(nombreAmigo.value == ""){
-        alert("Por favor agregue un nombre.");
+        alert("Por favor, agregue un nombre.");
     }else{
         limpiarLista('#listaAmigos');
+        listaDeAmigos.push(nombreAmigo.value);
         for (let amigo in listaDeAmigos){
             agregarLista('#listaAmigos', listaDeAmigos[amigo])
         }
     }
-
+    nombreAmigo.focus();
     nombreAmigo.value = "";
 }
 
+//Se crea la funcion para seleccionar al amigo secreto.
 function sortearAmigo(){
+    limpiarLista('#listaAmigos');
+    limpiarLista('#resultado');
 
+    if(listaDeAmigos.length != 0){
+        let indice = Math.floor(Math.random() * listaDeAmigos.length);
+        agregarLista('#resultado', `Tu amigo secreto es: ${listaDeAmigos[indice]}`);
+    }else{
+        alert('No hay ningun amigo en las lista.')
+    }
 }
